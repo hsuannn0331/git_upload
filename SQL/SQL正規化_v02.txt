@@ -1,0 +1,188 @@
+-- 2. 建立資料表
+create table STUDENT.MIAOLI_VIL(
+ VIL_NO VARCHAR2(10 BYTE) primary key,
+ VIL_PLACE NVARCHAR2(4),
+ VIL_ADD NVARCHAR2(20),
+ VIL_TEL VARCHAR2(20 BYTE)
+);
+
+create table STUDENT.MIAOLI_POL(
+ POL_NO VARCHAR2(10 BYTE) primary key,
+ POL_BR NVARCHAR2(6),
+ POL_ADD NVARCHAR2(20),
+ POL_TEL VARCHAR2(20 BYTE)
+);
+
+create table STUDENT.MIAOLI_EVA(
+ FACILITY_NO VARCHAR2(10 BYTE) primary key,
+ BUILDING NVARCHAR2(6),
+ VIL_NO VARCHAR2(10 BYTE) references MIAOLI_VIL(VIL_NO),
+ FACILITY_ADD NVARCHAR2(20),
+ ACCOMMODATION NUMBER(6,0),
+ BASEMENT NUMBER(2,0),
+ POL_NO VARCHAR2(10 BYTE) references MIAOLI_POL(POL_NO)
+);
+
+
+
+-- 3. 插入資料 MIAOLI_VIL
+insert into STUDENT.MIAOLI_VIL
+ (VIL_NO, VIL_PLACE, VIL_ADD, VIL_TEL) values
+ ('C001', '大埔里', '苗栗縣竹南鎮公義路1035號', '037-581072');
+insert into STUDENT.MIAOLI_VIL
+ (VIL_NO, VIL_PLACE, VIL_ADD, VIL_TEL) values
+ ('C002', '竹南里', '苗栗縣竹南鎮竹南里中山路103號', '037-472735');
+insert into STUDENT.MIAOLI_VIL
+ (VIL_NO, VIL_PLACE, VIL_ADD, VIL_TEL) values
+ ('C003', '山佳里', '苗栗縣竹南鎮山佳里國光街14號', '037-614186');
+insert into STUDENT.MIAOLI_VIL
+ (VIL_NO, VIL_PLACE, VIL_ADD, VIL_TEL) values
+ ('C004', '埔頂里', '苗栗縣後龍鎮埔頂里中興路136-1號', '037-724839');
+insert into STUDENT.MIAOLI_VIL
+ (VIL_NO, VIL_PLACE, VIL_ADD, VIL_TEL) values
+ ('C005', '綠苗里', '苗栗縣苗栗市綠苗里中正路766號', '037-333240');
+insert into STUDENT.MIAOLI_VIL
+ (VIL_NO, VIL_PLACE, VIL_ADD, VIL_TEL) values
+ ('C006', '民族里', '苗栗縣頭份市民族里民族路96號', '037-660001');
+insert into STUDENT.MIAOLI_VIL
+ (VIL_NO, VIL_PLACE, VIL_ADD, VIL_TEL) values
+ ('C007', '忠孝里', '苗栗縣頭份市忠孝里光大街82號', '037-661145');
+insert into STUDENT.MIAOLI_VIL
+ (VIL_NO, VIL_PLACE, VIL_ADD, VIL_TEL) values
+ ('C008', '信義里', '苗栗縣頭份市信義里信義路53巷1號', '037-616072');
+
+commit;
+
+-- 3. 插入資料 MIAOLI_POL
+insert into STUDENT.MIAOLI_POL
+ (POL_NO, POL_BR, POL_ADD, POL_TEL) values
+ ('M001', '竹南分局', '竹南鎮民族街72號', '037-474796');
+insert into STUDENT.MIAOLI_POL
+ (POL_NO, POL_BR, POL_ADD, POL_TEL) values
+ ('M002', '苗栗分局', '苗栗市金鳳街109號', '037-320059');
+insert into STUDENT.MIAOLI_POL
+ (POL_NO, POL_BR, POL_ADD, POL_TEL) values
+ ('M003', '頭份分局', '頭份市中興路503號', '037-663004');
+
+commit;
+
+-- 3. 插入資料 MIAOLI_EVA
+insert into STUDENT.MIAOLI_EVA
+ (FACILITY_NO, BUILDING, VIL_NO, FACILITY_ADD, ACCOMMODATION, BASEMENT, POL_NO) values
+ ('F001', '公寓', 'C001', '中埔街20號', 100, 1, 'M001');
+insert into STUDENT.MIAOLI_EVA
+ (FACILITY_NO, BUILDING, VIL_NO, FACILITY_ADD, ACCOMMODATION, BASEMENT, POL_NO) values
+ ('F002', '大樓', 'C002', '和平街79號', 3142, 1, 'M001');
+insert into STUDENT.MIAOLI_EVA
+ (FACILITY_NO, BUILDING, VIL_NO, FACILITY_ADD, ACCOMMODATION, BASEMENT, POL_NO) values
+ ('F003', '大樓', 'C003', '龍山路三段142號', 1072, 1, 'M001');
+insert into STUDENT.MIAOLI_EVA
+ (FACILITY_NO, BUILDING, VIL_NO, FACILITY_ADD, ACCOMMODATION, BASEMENT, POL_NO) values
+ ('F004', '公共設施', 'C004', '中華路1498號', 32, 1, 'M001');
+insert into STUDENT.MIAOLI_EVA
+ (FACILITY_NO, BUILDING, VIL_NO, FACILITY_ADD, ACCOMMODATION, BASEMENT, POL_NO) values
+ ('F005', '公寓', 'C005', '米市街80號', 106, 1, 'M002');
+insert into STUDENT.MIAOLI_EVA
+ (FACILITY_NO, BUILDING, VIL_NO, FACILITY_ADD, ACCOMMODATION, BASEMENT, POL_NO) values
+ ('F006', '公寓', 'C005', '光復路117號', 26, 1, 'M002');
+insert into STUDENT.MIAOLI_EVA
+ (FACILITY_NO, BUILDING, VIL_NO, FACILITY_ADD, ACCOMMODATION, BASEMENT, POL_NO) values
+ ('F007', '大樓', 'C005', '博愛街109號', 2038, 2, 'M002');
+insert into STUDENT.MIAOLI_EVA
+ (FACILITY_NO, BUILDING, VIL_NO, FACILITY_ADD, ACCOMMODATION, BASEMENT, POL_NO) values
+ ('F008', '大樓', 'C005', '大同路53號', 128, 2, 'M002');
+insert into STUDENT.MIAOLI_EVA
+ (FACILITY_NO, BUILDING, VIL_NO, FACILITY_ADD, ACCOMMODATION, BASEMENT, POL_NO) values
+ ('F009', '公共設施', 'C006', '和平路102號', 353, 1, 'M003');
+insert into STUDENT.MIAOLI_EVA
+ (FACILITY_NO, BUILDING, VIL_NO, FACILITY_ADD, ACCOMMODATION, BASEMENT, POL_NO) values
+ ('F010', '私營單位', 'C007', '忠孝忠孝一路69號', 501, 1, 'M003');
+insert into STUDENT.MIAOLI_EVA
+ (FACILITY_NO, BUILDING, VIL_NO, FACILITY_ADD, ACCOMMODATION, BASEMENT, POL_NO) values
+ ('F011', '公寓', 'C008', '中正路65號', 194, 1, 'M003');
+insert into STUDENT.MIAOLI_EVA
+ (FACILITY_NO, BUILDING, VIL_NO, FACILITY_ADD, ACCOMMODATION, BASEMENT, POL_NO) values
+ ('F012', '私營單位', 'C008', '中正路116號', 78, 1, 'M003');
+
+commit;
+
+
+
+-- 4.1
+select distinct
+p.POL_BR as 轄管分局,
+p.POL_TEL as 分局連絡電話
+ from STUDENT.MIAOLI_EVA e
+ left join STUDENT.MIAOLI_POL p on p.POL_NO = e.POL_NO
+ where e.ACCOMMODATION > 1000;
+
+-- 4.2
+select distinct
+p.POL_BR as 轄管分局,
+p.POL_TEL as 分局連絡電話,
+count(e.FACILITY_NO) over (partition by p.POL_BR, p.POL_TEL) as "容人數量>1000的避難設施數量"
+ from STUDENT.MIAOLI_EVA e
+ left join STUDENT.MIAOLI_POL p on p.POL_NO = e.POL_NO
+ where e.ACCOMMODATION > 1000;
+
+-- 4.3
+select
+p.POL_BR as 轄管分局,
+p.POL_TEL as 分局連絡電話,
+substr(v.VIL_ADD,1,6)||e.FACILITY_ADD as 避難設施地址,
+e.BUILDING as 類型,
+count(e.FACILITY_NO) over (partition by p.POL_BR, p.POL_TEL, substr(v.VIL_ADD,1,6)||e.FACILITY_ADD, e.BUILDING) as "容人數量>1000的避難設施數量"
+ from STUDENT.MIAOLI_EVA e
+ left join STUDENT.MIAOLI_VIL v on v.VIL_NO = e.VIL_NO
+ left join STUDENT.MIAOLI_POL p on p.POL_NO = e.POL_NO
+ where e.ACCOMMODATION > 1000;
+
+-- 4.4
+select
+v.VIL_PLACE as 村里別,
+substr(v.VIL_ADD,1,6)||e.FACILITY_ADD as 避難設施地址,
+e.ACCOMMODATION as 容人數量,
+p.POL_BR as 轄管分局,
+p.POL_TEL as 分局連絡電話
+ from STUDENT.MIAOLI_EVA e
+ left join STUDENT.MIAOLI_VIL v on v.VIL_NO = e.VIL_NO
+ left join STUDENT.MIAOLI_POL p on p.POL_NO = e.POL_NO
+ where e.FACILITY_ADD like '%中%';
+
+-- 4.5
+select
+v.VIL_PLACE as 村里別,
+v.VIL_ADD as 村里辦公室位置,
+substr(v.VIL_ADD,1,6)||e.FACILITY_ADD as 避難設施地址,
+e.ACCOMMODATION as 容人數量
+ from STUDENT.MIAOLI_EVA e
+ left join STUDENT.MIAOLI_VIL v on v.VIL_NO = e.VIL_NO
+ left join STUDENT.MIAOLI_POL p on p.POL_NO = e.POL_NO
+ where e.BUILDING in ('公寓', '大樓');
+
+
+
+-- 第五題_建立專門給第五題做修改的表格
+create tabLe STUDENT.MIAOLI_VIL_FORQ5 as select * from MIAOLI_VIL;
+create tabLe STUDENT.MIAOLI_POL_FORQ5 as select * from MIAOLI_POL;
+create tabLe STUDENT.MIAOLI_EVA_FORQ5 as select * from MIAOLI_EVA;
+
+alter table STUDENT.MIAOLI_VIL_FORQ5 add primary key(VIL_NO);
+alter table STUDENT.MIAOLI_POL_FORQ5 add primary key(POL_NO);
+alter table STUDENT.MIAOLI_EVA_FORQ5 add primary key(FACILITY_NO);
+
+alter table STUDENT.MIAOLI_EVA_FORQ5 add foreign key(VIL_NO)references MIAOLI_VIL(VIL_NO);
+alter table STUDENT.MIAOLI_EVA_FORQ5 add foreign key(POL_NO)references MIAOLI_POL(POL_NO);
+
+-- 5.1
+update STUDENT.MIAOLI_EVA_FORQ5
+ set ACCOMMODATION = 5000
+ where FACILITY_ADD = '和平街79號';
+
+commit;
+
+-- 5.2
+delete from STUDENT.MIAOLI_EVA_FORQ5
+ where ACCOMMODATION < 1000;
+
+commit;
