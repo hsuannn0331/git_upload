@@ -13,42 +13,41 @@ import java.util.List;
 
 public class HRMain {
 	public static void main(String[] args) {
-        List<Employee> employeeList = new ArrayList<>();
-        employeeList.add(new Sales("張志城", "信用卡部", 35000, 6000));
-        employeeList.add(new Sales("林大鈞", "保代部", 38000, 4000));
-        employeeList.add(new Supervisor("李中白", "資訊部", 65000));
-        employeeList.add(new Supervisor("林小中", "理財部", 80000));
+		List<Employee> employeeList = new ArrayList<>();
+		employeeList.add(new Sales("張志城", "信用卡部", 35000, 6000));
+		employeeList.add(new Sales("林大鈞", "保代部", 38000, 4000));
+		employeeList.add(new Supervisor("李中白", "資訊部", 65000));
+		employeeList.add(new Supervisor("林小中", "理財部", 80000));
 
-        for (Employee employee : employeeList) {
-            employee.printInfo();
-        }
+		for (Employee employee : employeeList) {
+			employee.printInfo();
+		}
 
-        try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File("d:/output.csv")), StandardCharsets.UTF_8))) {
-            bw.write('\ufeff');
-            // 排序
-            Collections.sort(employeeList, new Comparator<Employee>() {
-                @Override
-                public int compare(Employee o1, Employee o2) {
-                    if (o1 instanceof Supervisor && !(o2 instanceof Supervisor)) {
-                        return -1;
-                    }
-                    else if (!(o1 instanceof Supervisor) && o2 instanceof Supervisor) {
-                        return 1;
-                    }
-                    else {
+		try (BufferedWriter bw = new BufferedWriter(
+				new OutputStreamWriter(new FileOutputStream(new File("d:/output.csv")), StandardCharsets.UTF_8))) {
+			bw.write('\ufeff');
+
+			Collections.sort(employeeList, new Comparator<Employee>() {
+				@Override
+				public int compare(Employee o1, Employee o2) {
+					if (o1 instanceof Supervisor && !(o2 instanceof Supervisor)) {
+						return -1;
+					} else if (!(o1 instanceof Supervisor) && o2 instanceof Supervisor) {
+						return 1;
+					} else {
 						return o1.getPayment() - o2.getPayment();
-                    }
-                }
-            });
+					}
+				}
+			});
 
-            for (Employee employee : employeeList) {
-                String getNameAndPayment = employee.getName() + ", " + employee.getPayment();
-                bw.write(getNameAndPayment);
-                bw.newLine();
-            }
+			for (Employee employee : employeeList) {
+				String getNameAndPayment = employee.getName() + ", " + employee.getPayment();
+				bw.write(getNameAndPayment);
+				bw.newLine();
+			}
 
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
-    }
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		}
+	}
 }
