@@ -25,7 +25,7 @@ public class HRMain {
 		}
 
 		try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(
-				new FileOutputStream(new File("C:/Users/Admin/Desktop/Java班/教材/Java/output.csv")),
+				new FileOutputStream(new File("D:/output.csv")),
 				StandardCharsets.UTF_8))) {
 			bw.write('\ufeff');
 			Collections.sort(employeeList, new Comparator<Employee>() {
