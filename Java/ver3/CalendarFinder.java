@@ -1,5 +1,6 @@
 package com.cathaybk.practice.nt50346.b;
 
+import java.time.Year;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
@@ -12,12 +13,13 @@ public class CalendarFinder {
 		int m = inputMonth.nextInt();
 		inputMonth.close();
 
-		Calendar calendar = new GregorianCalendar(2024, m - 1, 1);
+		int currentYear = Year.now().getValue();
+		Calendar calendar = new GregorianCalendar(currentYear, m - 1, 1);
 
 		int firstDateOfWeek = calendar.get(Calendar.DAY_OF_WEEK) - 1;
 		int daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
 
-		System.out.printf("              2024年%d月\n", m);
+		System.out.printf("              %d年%d月\n",currentYear, m);
 		System.out.println("----------------------------------");
 		System.out.println("日    一    二    三    四    五    六");
 		System.out.println("==================================");
