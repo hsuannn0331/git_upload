@@ -54,9 +54,11 @@ public class CarInfo {
 						minTotalByType = minTotalByType.add(minPrice);
 						totalByType = totalByType.add(price);
 
-						String minPriceString = (car.get("MIN.PRICE") != null) ? minPrice.stripTrailingZeros().toPlainString()
-								: "null";
-						String priceString = (car.get("PRICE") != null) ? price.stripTrailingZeros().toPlainString() : "null";
+						String minPriceString = (car.get("MIN.PRICE") != null)
+								? minPrice.stripTrailingZeros().toPlainString()
+								: "";
+						String priceString = (car.get("PRICE") != null) ? price.stripTrailingZeros().toPlainString()
+								: "";
 
 						System.out.printf("%-14s%-10s%8s%8s\n", car.get("MANUFACTURER"), car.get("TYPE"),
 								minPriceString, priceString);

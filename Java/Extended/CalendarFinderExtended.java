@@ -15,10 +15,10 @@ public class CalendarFinderExtended {
 		int currentYear = Year.now().getValue();
 		LocalDate getMonth = LocalDate.of(currentYear, m, 1);
 
-		int firstDateOfWeek = getMonth.getDayOfWeek().getValue();
+		int firstDateOfWeek = getMonth.getDayOfWeek().getValue() % 7;
 		int daysInMonth = getMonth.lengthOfMonth();
 
-		System.out.printf("              %d年%d月\n",currentYear, m);
+		System.out.printf("              %d年%d月\n", currentYear, m);
 		System.out.println("----------------------------------");
 		System.out.println("日    一    二    三    四    五    六");
 		System.out.println("==================================");
@@ -37,7 +37,5 @@ public class CalendarFinderExtended {
 			}
 			countDayOfWeek++;
 		}
-
 	}
-
 }
