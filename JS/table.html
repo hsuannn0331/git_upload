@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      table {
+        border-collapse: collapse;
+        margin: 20px;
+      }
+      td {
+        text-align: center;
+        padding: 20px;
+      }
+    </style>
+    <script type="text/javaScript">
+      window.onload = function () {
+
+        let number = 1;
+        const table = document.getElementById('outputTable');
+
+        function updateRowNums() {
+            const rows = table.rows;
+            const rowCount = rows.length
+            for (let i = 1; i < rowCount; i++) {
+                rows[i].cells[1].innerHTML = i;
+            }
+            number = rowCount;
+        }
+
+        document.getElementById('add').onclick = function () {
+            const getManu = document.getElementById('manuInput').value;
+            const getType = document.getElementById('typeInput').value;
+            const getMini = document.getElementById('miniInput').value;
+            const getPrice = document.getElementById('priceInput').value;
+
+            if (getManu == '' || getType == '') {
+                alert('製造商或類別不可為空白');
+            } else {
+                const row = table.insertRow(-1);
+
+                const newSelect = row.insertCell(0);
+                const newNum = row.insertCell(1);
+                const newManu = row.insertCell(2);
+                const newType = row.insertCell(3);
+                const newMini = row.insertCell(4);
+                const newPrice = row.insertCell(5);
+                const newDelete = row.insertCell(6);
+
+                const createSelect = document.createElement('input');
+                createSelect.type = 'radio';
+                createSelect.name = 'inputInfo';
+                createSelect.onclick = function () {
+                    const rows = table.rows;
+                    const rowIndex = row.rowIndex;
+                    document.getElementById('manuInput').value = rows[rowIndex].cells[2].innerHTML;
+                    document.getElementById('typeInput').value = rows[rowIndex].cells[3].innerHTML;
+                    document.getElementById('miniInput').value = rows[rowIndex].cells[4].innerHTML;
+                    document.getElementById('priceInput').value = rows[rowIndex].cells[5].innerHTML;
+                };
+
+                const createDelete = document.createElement('button');
+                createDelete.innerHTML = '刪除';
+                createDelete.onclick = function () {
+                    table.deleteRow(this.closest('tr').rowIndex);
+                    updateRowNums();
+                };
+
+                newSelect.appendChild(createSelect);
+                newNum.innerHTML = number;
+                newManu.innerHTML = getManu;
+                newType.innerHTML = getType;
+                newMini.innerHTML = getMini;
+                newPrice.innerHTML = getPrice;
+                newDelete.appendChild(createDelete);
+
+                number++;
+
+            }
+        }
+
+        document.getElementById('clear').onclick = function () {
+            document.getElementById('manuInput').value = '';
+            document.getElementById('typeInput').value = '';
+            document.getElementById('miniInput').value = '';
+            document.getElementById('priceInput').value = '';
+
+            for (let i = table.rows.length - 1; i > 0 ; i--){
+                table.deleteRow(i);
+            }
+            number = 1;
+        };
+
+        document.getElementById('modify').onclick = function () {
+            let selectedRadio = document.querySelector('input[name=inputInfo]:checked');
+            if (!selectedRadio) {
+                alert('尚未選取修改欄位');
+            } else {
+                if (document.getElementById('manuInput').value == '' || document.getElementById('typeInput').value == '') {
+                    alert('製造商或類別不可為空白');
+                } else {
+                    const rows = table.rows;
+                    const rowIndex = selectedRadio.closest('tr').rowIndex;
+                    rows[rowIndex].cells[2].innerHTML = document.getElementById('manuInput').value;
+                    rows[rowIndex].cells[3].innerHTML = document.getElementById('typeInput').value;
+                    rows[rowIndex].cells[4].innerHTML = document.getElementById('miniInput').value;
+                    rows[rowIndex].cells[5].innerHTML = document.getElementById('priceInput').value;
+                }
+            }
+        };
+      }
+    </script>
+  </head>
+
+  <body>
+    <table border="1" id="inputTable">
+      <tr>
+        <td id="manufacturer" class="infoBlock">製造商</td>
+        <td class="inputBlock">
+          <input type="text" id="manuInput" name="manuInput" />
+        </td>
+        <td id="type" class="infoBlock">類別</td>
+        <td class="inputBlock">
+          <input type="text" id="typeInput" name="typeInput" />
+        </td>
+      </tr>
+      <tr>
+        <td id="miniPrice" class="infoBlock">底價</td>
+        <td class="inputBlock">
+          <input type="text" id="miniInput" name="miniInput" />
+        </td>
+        <td id="price" class="infoBlock">售價</td>
+        <td class="inputBlock">
+          <input type="text" id="priceInput" name="priceInput" />
+        </td>
+      </tr>
+      <tr>
+        <td colspan="4" id="buttons" class="buttonBlock">
+          <button type="button" id="add">新增</button>
+          <button type="button" id="modify">修改</button>
+          <button type="button" id="clear">清空</button>
+        </td>
+      </tr>
+    </table>
+    <table border="1" id="outputTable">
+      <tr>
+        <td id="select"></td>
+        <td>序號</td>
+        <td>製造商</td>
+        <td>類別</td>
+        <td>底價</td>
+        <td>售價</td>
+        <td id="delete"></td>
+      </tr>
+
+      <output name="result" id="output"></output>
+    </table>
+  </body>
+</html>

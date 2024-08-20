@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      span.info {
+        display: inline-block;
+        width: 80px;
+        font-family: sans-serif;
+      }
+      .block {
+        display: flex;
+        padding: 8px;
+      }
+      button {
+        display: inline-block;
+        padding: 2px 10px;
+        margin-right: 20px;
+      }
+    </style>
+    <script type="text/javascript" src="./HashMap.js"></script>
+    <script type="text/javaScript">
+      window.onload = function () {
+          const map = new HashMap();
+
+          document.getElementById('put').onclick = function () {
+            const getKey = document.getElementById('keyInput').value;
+            const getValue = document.getElementById('valueInput').value;
+            const outputPrint = document.getElementById('output');
+            let showResult = '【Result】<br/>';
+
+            if (getKey == '') {
+                alert('Key should not be empty.');
+            } else if (map.contains(getKey)){
+                alert('This key has already existed.');
+            } else {
+                map.put(getKey, getValue);
+            }
+
+            const keys = map.keys();
+            for(let key of keys){
+                showResult += (key + ' : ' + map.get(key) + '<br/>');
+            }
+
+            outputPrint.innerHTML = showResult;
+          }
+
+        document.getElementById('clear').onclick = function () {
+            map.clear();
+
+            document.getElementById('keyInput').value = "";
+            document.getElementById('valueInput').value = "";
+            document.getElementById('output').innerHTML = "";
+        }
+      }
+    </script>
+  </head>
+
+  <body>
+    <form method="post">
+      <div id="keyBlock" class="block">
+        <span id="key" class="info">KEY</span>
+        <input type="text" id="keyInput" name="keyInput" />
+      </div>
+      <div id="valueBlock" class="block">
+        <span id="value" class="info">VALUE</span>
+        <input type="text" id="valueInput" name="valueInput" />
+      </div>
+    </form>
+    <hr />
+    <div id="buttonBlock" class="block">
+      <button type="button" id="put">PUT</button>
+      <button type="button" id="clear">CLEAR</button>
+    </div>
+    <hr />
+    <div id="outputBlock" class="block">
+      <output name="result" id="output"></output>
+    </div>
+  </body>
+</html>
