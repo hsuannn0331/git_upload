@@ -15,26 +15,26 @@
     <script type="text/javaScript">
       window.onload = function () {
 
-        let number = 1;
         const table = document.getElementById('outputTable');
 
-        function updateRowNums() {
-            const rows = table.rows;
-            const rowCount = rows.length
-            for (let i = 1; i < rowCount; i++) {
-                rows[i].cells[1].innerHTML = i;
-            }
-            number = rowCount;
+        let getNumber = function(){
+          let serialNumber = table.rows.length - 1;
+          return serialNumber;
+        }
+
+        const isEmpty = function (nowkey) {
+          return !nowkey.trim();
         }
 
         document.getElementById('add').onclick = function () {
-            const getManu = document.getElementById('manuInput').value;
-            const getType = document.getElementById('typeInput').value;
-            const getMini = document.getElementById('miniInput').value;
-            const getPrice = document.getElementById('priceInput').value;
+            const manufactureValue = document.getElementById('manuInput').value;
+            const typeValue = document.getElementById('typeInput').value;
+            const miniValue = document.getElementById('miniInput').value;
+            const priceValue = document.getElementById('priceInput').value;
 
-            if (getManu == '' || getType == '') {
+            if (isEmpty(manufactureValue) || isEmpty(typeValue)) {
                 alert('製造商或類別不可為空白');
+                return;
             } else {
                 const row = table.insertRow(-1);
 
@@ -61,19 +61,20 @@
                 const createDelete = document.createElement('button');
                 createDelete.innerHTML = '刪除';
                 createDelete.onclick = function () {
-                    table.deleteRow(this.closest('tr').rowIndex);
-                    updateRowNums();
+                  const rows = table.rows;
+                  table.deleteRow(this.closest('tr').rowIndex);
+                  for (let i = 1; i < rows.length; i++) {
+                    rows[i].cells[1].innerHTML = i;
+                  }
                 };
 
                 newSelect.appendChild(createSelect);
-                newNum.innerHTML = number;
-                newManu.innerHTML = getManu;
-                newType.innerHTML = getType;
-                newMini.innerHTML = getMini;
-                newPrice.innerHTML = getPrice;
+                newNum.innerHTML = getNumber();
+                newManu.innerHTML = manufactureValue;
+                newType.innerHTML = typeValue;
+                newMini.innerHTML = miniValue;
+                newPrice.innerHTML = priceValue;
                 newDelete.appendChild(createDelete);
-
-                number++;
 
             }
         }
@@ -87,7 +88,6 @@
             for (let i = table.rows.length - 1; i > 0 ; i--){
                 table.deleteRow(i);
             }
-            number = 1;
         };
 
         document.getElementById('modify').onclick = function () {
@@ -151,8 +151,6 @@
         <td>售價</td>
         <td id="delete"></td>
       </tr>
-
-      <output name="result" id="output"></output>
     </table>
   </body>
 </html>

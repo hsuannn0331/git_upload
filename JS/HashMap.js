@@ -1,24 +1,24 @@
 
 const HashMap = function() {
     
-    let obj = {}
+    let mapData = {}
 
     return {
-        put: function(k, v) {
-            obj[k] = v;
+        put: function(key, value) {
+            mapData[key] = value;
         },
         keys: function() {
-            return Object.keys(obj);
+            return Object.keys(mapData);
         },
-        contains: function(k) {
-            return (k in obj);
+        contains: function(key) {
+            return (key in mapData);
         },
-        get: function(k) {
-            return obj[k];
+        get: function(key) {
+            return mapData[key];
         },
         clear: function() {
-           for(let key in obj){
-            delete obj[key];
+           for(let key in mapData){
+            delete mapData[key];
            }
         }
     };

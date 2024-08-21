@@ -23,18 +23,23 @@
       window.onload = function () {
           const map = new HashMap();
 
+          const isEmpty = function (nowkey) {
+          return !nowkey.trim();
+          }
+
           document.getElementById('put').onclick = function () {
             const getKey = document.getElementById('keyInput').value;
-            const getValue = document.getElementById('valueInput').value;
             const outputPrint = document.getElementById('output');
             let showResult = '【Result】<br/>';
 
-            if (getKey == '') {
+            if (isEmpty(getKey)) {
                 alert('Key should not be empty.');
+                return;
             } else if (map.contains(getKey)){
                 alert('This key has already existed.');
+                return;
             } else {
-                map.put(getKey, getValue);
+                map.put(getKey, document.getElementById('valueInput').value);
             }
 
             const keys = map.keys();
@@ -52,6 +57,7 @@
             document.getElementById('valueInput').value = "";
             document.getElementById('output').innerHTML = "";
         }
+
       }
     </script>
   </head>
